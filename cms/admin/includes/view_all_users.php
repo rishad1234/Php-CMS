@@ -49,8 +49,8 @@
 //                                        echo "<td><a href='../post.php?p_id=$post_id'>{$post_title}</td>";
 //                                    }
                                     
-                                    echo "<td><a href='users.php?change_to_admin={$user_id}'>Admin</a></td>";
-                                    echo "<td><a href='users.php?change_to_sub={$user_id}'>Subscriber</a></td>";
+                                    echo "<td><a href='users.php?change_to_admin={$user_id}'>admin</a></td>";
+                                    echo "<td><a href='users.php?change_to_sub={$user_id}'>subscriber</a></td>";
                                     echo "<td><a href='users.php?source=edit_user&edit_user={$user_id}'>Edit</a></td>";
                                     echo "<td><a href='users.php?delete={$user_id}'>Delete</a></td>";
                                     echo "</tr>";  
@@ -72,7 +72,7 @@
 
         if(isset($_GET['change_to_sub'])){
             $the_user_id = $_GET['change_to_sub'];
-            $query = "UPDATE users SET user_role = 'Subscriber' ";
+            $query = "UPDATE users SET user_role = 'subscriber' ";
             $query .= "WHERE user_id = $the_user_id ";
             
             $subscriber_query = mysqli_query($connection, $query);
@@ -83,7 +83,7 @@
 
         if(isset($_GET['change_to_admin'])){
             $the_user_id = $_GET['change_to_admin'];
-            $query = "UPDATE users SET user_role = 'Admin' ";
+            $query = "UPDATE users SET user_role = 'admin' ";
             $query .= "WHERE user_id = $the_user_id ";
             
             $admin_query = mysqli_query($connection, $query);

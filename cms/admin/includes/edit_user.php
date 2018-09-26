@@ -60,9 +60,9 @@
             <option value="subscriber"><?php echo $user_role;?></option>
             <?php
                 if($user_role == "admin"){
-                    echo '<option value="subscriber">Subscriber</option>';
+                    echo '<option value="subscriber">subscriber</option>';
                 }else{
-                    echo '<option value="admin">Admin</option>';
+                    echo '<option value="admin">admin</option>';
                 }
             ?>
 <!--
