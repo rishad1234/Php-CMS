@@ -52,6 +52,10 @@
             
             $update_post = mysqli_query($connection, $query);
             confirmQuery($update_post);
+            
+            echo "<p class='bg-success'>Post updated. <a href='../post.php?p_id={$get_post_id}'>View Post</a></p>";
+            echo "<p class='bg-success'><a href='post.php'>Edit more post</a></p>";
+            
         }
     }
 
@@ -83,11 +87,18 @@
         <label for="author">Post Author</label>
         <input type="text" value="<?php echo $post_author; ?>" class="form-control" name="post_author">
     </div>
-    
-    <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" value="<?php echo $post_status; ?>" class="form-control" name="post_status">
-    </div>
+    <div class="form-control">
+        <select name="post_status" id="">
+            <option value='<?php echo $post_status; ?>'><?php echo $post_status; ?></option>
+            <?php
+                if($post_status == 'publish'){
+                    echo "<option value='draft'>Draft</option>";
+                }else{
+                    echo "<option value='publish'>Publish</option>";
+                }
+            ?>
+        </select>
+    </div>    
 
     <div class="form-group">
         <img width="100" src="../images/<?php echo $post_image;?>" name="image">
@@ -101,7 +112,7 @@
     
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control"name="post_content" id="" cols="30" rows="10"><?php echo $post_content;?></textarea>
+        <textarea class="form-control"name="post_content" id="body" cols="30" rows="10"><?php echo $post_content;?></textarea>
     </div>
     
     <div class="form-group">
