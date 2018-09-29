@@ -1,17 +1,47 @@
+<?php
+    if(isset($_POST['checkBOxArray'])){
+        foreach($_POST['checkBOxArray'] as $postValueId){
+            $bulk_options = $_POST['bulk_options'];
+            
+            switch($bulk_options){
+                case 'publish':
+                    $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValueId} ";
+                    $update_status = mysqli_query($connection, $query);
+                    confirmQuery($update_status);
+                    break;
+                case 'draft':
+                    $query = "UPDATE posts SET post_status = '{$bulk_options}' WHERE post_id = {$postValueId} ";
+                    $update_status = mysqli_query($connection, $query);
+                    confirmQuery($update_status);
+                    break;
+                case 'delete':
+                    $query = "DELETE FROM posts WHERE post_id = {$postValueId} ";
+                    $delete_post = mysqli_query($connection, $query);
+                    confirmQuery($delete_post);
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+
+?>
+
 <form action="" method="post">                        
                         <table class="table table-bordered table-hover">
                             
                     <div id="bulkOptionContainer" class="col-xs-4">    
-                        <select class="form-control" name="" id="">
+                        <select class="form-control" name="bulk_options" id="">
                             <option value="">Select Options</option>
-                            <option value="">Publish</option>
-                            <option value="">Draft</option>
-                            <option value="">Delete</option>
+                            <option value="publish">Publish</option>
+                            <option value="draft">Draft</option>
+                            <option value="delete">Delete</option>
                         </select>
                     </div>
                     <div class="col-xs-4">
                         <input type="submit" name="submit" class="btn btn-success" value="Appy">
-                        <a class="btn btn-primary" href="add_post.php">Add new</a>
+                        <a class="btn btn-primary" href="post.php?source=add_post">Add new</a>
                     </div>
                             <thead>
                                 <tr>
@@ -27,6 +57,7 @@
                                     <th>Date</th>
                                     <th>Delete</th>
                                     <th>Edit</th>
+                                    <th>View</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -67,6 +98,7 @@
                                     echo "<td>{$post_date}</td>";
                                     echo "<td><a href='post.php?delete={$post_id}'>Delete</a></td>";
                                     echo "<td><a href='post.php?source=edit_post&p_id={$post_id}'>Edit</a></td>";
+                                    echo "<td><a href='../post.php?p_id={$post_id}'>View</a></td>";
                                     echo "</tr>";  
                                 }
                             ?>    

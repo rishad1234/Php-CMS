@@ -9,6 +9,22 @@
         .catch( error => {
             console.error( error );
         } );
+    
+//    $(document).ready(function(){
+//        $('#selectAllBoxes').click(function(event){
+//            alert("hello");
+//           if(this.checked){
+//               $('.checkBoxes').each(fucntion(){
+//                    
+//                });
+//           }else{
+//               $('.checkBoxes').each(fucntion(){
+//                   this.checked = false;                  
+//                });
+//           } 
+//        });
+//    });
+    
 </script>
 
 </body>
