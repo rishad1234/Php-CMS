@@ -28,17 +28,28 @@
         $user_email = $_POST['user_email'];
         $user_role = $_POST['user_role'];
         
+        $query = "SELECT randsalt FROM users ";
+        $select_randsalt_query = mysqli_query($connection, $query);
+        confirmQuery($select_randsalt_query);
+        
+        $row = mysqli_fetch_array($select_randsalt_query);
+        $salt = $row['randsalt'];
+        $hashed_password = crypt($user_password, $salt);
+        
         $query = "UPDATE users SET ";
         $query .= "user_firstname = '{$user_firstname}', ";
         $query .= "user_lastname = '{$user_lastname}', ";
         $query .= "user_role = '{$user_role}', ";
         $query .= "username = '{$username}', ";
         $query .= "user_email = '{$user_email}', ";
-        $query .= "user_password = '{$user_password}' ";
+        $query .= "user_password = '{$hashed_password}' ";
         $query .= "WHERE user_id = {$the_user_id} ";
         
         $user_update = mysqli_query($connection, $query);
         confirmQuery($user_update);
+        
+        echo "<p>User Updated</p>";
+        echo "<a href='users.php'>View Users</a>";
     }     
 ?>
 
@@ -57,7 +68,7 @@
     
     <div class="form-group">
         <select name="user_role" id="user_role">
-            <option value="subscriber"><?php echo $user_role;?></option>
+            <option value="<?php echo $user_role;?>"><?php echo $user_role;?></option>
             <?php
                 if($user_role == "admin"){
                     echo '<option value="subscriber">subscriber</option>';
